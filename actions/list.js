@@ -1,7 +1,7 @@
 
 	const execute = require('../lib/executeCommand');
 
-	module.exports = (vm) => {
+	module.exports = () => {
 
 		return new Promise((resolve, reject) => {
 
