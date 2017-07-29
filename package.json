@@ -1,0 +1,20 @@
+{
+  "name": "node-vbox",
+  "version": "0.1.0",
+  "description": "Interact with virtualbox from nodejs",
+  "main": "lib/main.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lluiscab/NodeVBox.git"
+  },
+  "keywords": [
+    "virtualbox",
+    "vbox"
+  ],
+  "author": "lluiscab",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lluiscab/NodeVBox/issues"
+  },
+  "homepage": "https://github.com/lluiscab/NodeVBox#readme"
+}
