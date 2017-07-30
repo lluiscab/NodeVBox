@@ -57,7 +57,7 @@
 
 							let disk = {
 								port: match[1],
-								subPort: match[2]
+								device: match[2]
 							};
 
 							let path = match[3];
