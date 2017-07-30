@@ -72,6 +72,11 @@ More examples can be found on the test folder
 
 - `.storage`
   - `.listMounted(uuid|vmname)` Lists all disks on a vm by controller
+  - `.attachVdi(uuid|vmname, path, storagectl, device, port)` Adds vdi to vm (Default SATA controller, port 0, device 0)
+  - `.attachISO(uuid|vmname, path, storagectl, device, port)` Adds iso to vm (Default IDE controller, port 0, device 0)
+  - `.detach(uuid|vmname, storagectl, device, port)` Detaches device on storagectl, port, device of a vm
+
+
 
 # License
 
