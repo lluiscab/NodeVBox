@@ -12,7 +12,7 @@ $ npm install node-vbox [--save] [-g]
 Import package
 
 ```javascript
-var nodevbox = require('node-vbox');
+  const nodevbox = require('node-vbox');
 ```
 
 # Usage
@@ -72,3 +72,8 @@ More examples can be found on the test folder
 
 - `.storage`
   - `.listMounted(uuid|vmname)` Lists all disks on a vm by controller
+
+# License
+
+[MIT](https://github.com/lluiscab/NodeVBox/blob/master/LICENSE)
+
