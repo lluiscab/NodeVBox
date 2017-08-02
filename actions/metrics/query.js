@@ -22,12 +22,14 @@
 
 					string = string.replace(new RegExp(name, 'gm'), '');
 
+					console.log(name);
+					console.log(string);
 					let metrics = {
 						time: new Date(),
 						data: {}
 					};
 
-					let regex = /^(\d\d):(\d\d):(\d\d).(\d\d\d)   (.+?(?= ))([^ ]*)\s*(.*)/gm;
+					let regex = /^\d\d:\d\d:\d\d.\d\d\d\s*(.+?(?= ))([^ ]*)\s*(.*)/gm;
 					let match;
 
 					while ((match = regex.exec(string)) !== null) {
@@ -40,7 +42,7 @@
 						// Extract metric name
 
 							// guest_ram_usage_cache:max
-							let metricName = match[5].toLowerCase().replace(/\//g, '_');
+							let metricName = match[1].toLowerCase().replace(/\//g, '_');
 
 							// guest_ram_usage_cache
 							let metric =  metricName.split(':')[0];
@@ -49,13 +51,21 @@
 							let name = metricName.split(':')[1] || 'current';
 
 							// value
-							let value = match[7];
+							let value = isNaN(parseInt(match[3])) ? null : match[3];
 
 
 						// Create metric object if not saved
 						if(!metrics.data[metric]) metrics.data[metric] = {};
 
 						metrics.data[metric][name] = value;
+
+					}
+
+					for(let key in metrics.data) {
+
+						if(!metrics.data[key].max) {
+							metrics.data[key] = null;
+						}
 
 					}
 
