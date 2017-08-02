@@ -5,8 +5,8 @@
 
 		return new Promise((resolve, reject) => {
 			execute([
-				'storageattach', vm,
-				'--storagectl', storagectl,
+				'storageattach', '"' + vm + '"',
+				'--storagectl', '"' + storagectl + '"',
 				'--device', device,
 				'--port', port,
 				'--medium', '"none"'

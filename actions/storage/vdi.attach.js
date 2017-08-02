@@ -10,8 +10,8 @@
 			let storagectl = _storagectl || 'SATA';
 
 			execute([
-				'storageattach', vm,
-				'--storagectl', storagectl,
+				'storageattach', '"' + vm + '"',
+				'--storagectl', '"' + storagectl + '"',
 				'--device', device,
 				'--port', port,
 				'--type', 'hdd',

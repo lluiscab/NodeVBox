@@ -11,8 +11,8 @@
 			let storagectl = _storagectl || 'IDE';
 
 			execute([
-				'storageattach', vm,
-				'--storagectl', storagectl,
+				'storageattach', '"' + vm + '"',
+				'--storagectl', '"'+ storagectl + '"',
 				'--device', device,
 				'--port', port,
 				'--type', 'dvddrive',

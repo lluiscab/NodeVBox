@@ -5,7 +5,7 @@
 
 		return new Promise((resolve, reject) => {
 
-			execute(['showvminfo', vm]).then(stdout => {
+			execute(['showvminfo', '"' + vm + '"']).then(stdout => {
 
 				let info = [];
 

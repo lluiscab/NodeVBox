@@ -6,7 +6,7 @@
 		return new Promise((resolve, reject) => {
 
 			execute([
-				'modifyhd', disk,
+				'modifyhd', '"' + disk + '"',
 				'--resize', newSize
 			]).then(resolve).catch(reject);
 

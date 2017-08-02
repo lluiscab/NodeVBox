@@ -5,7 +5,7 @@
 
 		return new Promise((resolve, reject) => {
 
-			execute(['controlvm', vm, 'poweroff'])
+			execute(['controlvm', '"' + vm + '"', 'poweroff'])
 				.then(resolve)
 				.catch(error => {
 

@@ -7,7 +7,7 @@
 
 			let type = gui ? 'gui' : 'headless';
 
-			execute(['-q', 'startvm', vm, '--type', type])
+			execute(['-q', 'startvm', '"' + vm + '"', '--type', type])
 				.then((stdout, stderr) => {
 
 					if(stdout.indexOf('has been successfully started.') > -1) {

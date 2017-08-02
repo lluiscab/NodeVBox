@@ -5,7 +5,7 @@
 
 		return new Promise((resolve, reject) => {
 
-			execute(['clonevm', vmToClone, '--name', '"' + newVmName + '"', '--register']).then((stdout, stderr) => {
+			execute(['clonevm', '"' + vmToClone + '"', '--name', '"' + newVmName + '"', '--register']).then((stdout, stderr) => {
 
 				if(stdout.indexOf('successfully cloned') > -1) {
 					resolve()
