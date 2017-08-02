@@ -21,9 +21,6 @@
 					let name = info.name;
 
 					string = string.replace(new RegExp(name, 'gm'), '');
-
-					console.log(name);
-					console.log(string);
 					let metrics = {
 						time: new Date(),
 						data: {}
