@@ -39,6 +39,8 @@ More examples can be found on the test folder
 
 - `version()` Returns the current vbox version
 
+- `.create(vmname, ostype)` Creates a new VM. Returns it's uuid. Check `vboxmanage list ostypes` for ostypes
+
 - `.start(uuid|vmname, gui)` Starts a headless vm by default, to start with gui, pass true as second arguemtn
 - `.stop(uuid|vmname)` Stops a VM
 - `.save(uuid|vmname)` Saves the state of the vm
@@ -68,7 +70,7 @@ More examples can be found on the test folder
 - `.metrics`
   - `.enable(uuid|vmname)` Enables metrics collection on a vm
   - `.disable(uuid|vmname)` Disables metrics collection on a vm
-  - `.get(uuid|vmname)` Returns metrics for a vm
+  - `.query(uuid|vmname)` Returns metrics for a vm
 
 - `.storage`
   - `.listMounted(uuid|vmname)` Lists all disks on a vm by controller
