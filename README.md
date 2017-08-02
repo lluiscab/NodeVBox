@@ -46,6 +46,7 @@ More examples can be found on the test folder
 - `.save(uuid|vmname)` Saves the state of the vm
 
 - `.clone(uuid|vmname, newvmname)` Clones a vm
+- `.bootOrder(uuid|vmname, boot1, boot2, boot3, boot4)` Changes vm boot order. Valid options are none|floppy|dvd|disk|net
 
 - `.isRunning(uuid|vmname)` Returns whatever a vm is running or not
 - `.getRunning()` Returns a list of all running vms
