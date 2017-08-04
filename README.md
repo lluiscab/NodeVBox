@@ -47,6 +47,8 @@ More examples can be found on the test folder
 
 - `.clone(uuid|vmname, newvmname)` Clones a vm
 - `.screenshot(uuid|vmname, path)` Takes a screenshot of a vm and saves it to `path`
+
+- `.setVrRam(uuid|vmname, ram)` Changes vm ram amount (In mb)
 - `.bootOrder(uuid|vmname, boot1, boot2, boot3, boot4)` Changes vm boot order. Valid options are none|floppy|dvd|disk|net
 
 - `.isRunning(uuid|vmname)` Returns whatever a vm is running or not
