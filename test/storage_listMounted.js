@@ -8,18 +8,25 @@
 			console.log('\n', controller.name, controller.type,
 				'Ports:', controller.port_count + '/' + controller.max_port_count);
 
-			controller.drives.forEach(drive => {
+			if(controller.drives) {
 
-				console.log('  ', drive.port, drive.subPort);
+				controller.drives.forEach(drive => {
 
-				if(drive.empty) {
-					console.log('     Drive empty');
-				} else {
-					console.log('    ', drive.path);
-					console.log('    ', drive.uuid);
-				}
+					console.log('  ', drive.port, drive.device);
 
-			});
+					if(drive.empty) {
+						console.log('     Drive empty');
+					} else {
+						console.log('    ', drive.path);
+						console.log('    ', drive.uuid);
+						console.log('    ', drive.type);
+						console.log('    ', drive.format);
+						console.log('    ', drive.size + ' / ' + drive.totalSize);
+					}
+
+				});
+
+			}
 
 		});
 

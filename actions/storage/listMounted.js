@@ -7,7 +7,7 @@
 
 			execute(['showvminfo', '"' + vm +'"']).then(stdout => {
 
-				let drives = [];
+				let controllers = [];
 
 				let regex = /^Storage Controller ([^(]*)\(([0-9])\):\s*(.*)/gm;
 				let match;
@@ -18,7 +18,7 @@
 						regex.lastIndex++;
 					}
 
-					if(!drives[match[2]]) drives[match[2]] = {
+					if(!controllers[match[2]]) controllers[match[2]] = {
 						index: parseInt(match[2])
 					};
 
@@ -33,65 +33,125 @@
 						value = value === 'on';
 					}
 
-
-					drives[match[2]][varname] = value
+					controllers[match[2]][varname] = value;
 
 				}
 
-				if(drives.length) {
+				if(controllers.length) {
 
-					drives.forEach(drive => {
+					Promise.all(controllers.map(controller => {
+						return new Promise((resolve, reject) => {
 
-						let name = drive.name.toUpperCase();
+							controller.drives = [];
 
-						drive.drives = [];
+							// Find drives on the controller
 
-						let regex = new RegExp('^' + name + ' \\(([0-9]), ([0-9])\\): (.*)', 'gm');
-						let match;
+							let name = controller.name.toUpperCase();
 
-						while ((match = regex.exec(stdout)) !== null) {
+							let regex = new RegExp('^' + name + ' \\(([0-9]), ([0-9])\\): (.*)', 'gm');
+							let match;
 
-							if (match.index === regex.lastIndex) {
-								regex.lastIndex++;
-							}
+							while ((match = regex.exec(stdout)) !== null) {
 
-							let disk = {
-								port: match[1],
-								device: match[2]
-							};
-
-							let path = match[3];
-
-							if(path === 'Empty') {
-								disk.empty = true;
-							} else {
-
-								let pathRegex = /^(.+?(?= \(UUID: )) \(UUID: ([^\)]*)\)/gm
-
-								let pathMatch = pathRegex.exec(path);
-
-								if(pathMatch)  {
-
-									disk.empty = false;
-									disk.path = pathMatch[1];
-									disk.uuid = pathMatch[2];
-
-								} else {
-									disk.empty = true;
+								if (match.index === regex.lastIndex) {
+									regex.lastIndex++;
 								}
 
+								let disk = {
+									port: match[1],
+									device: match[2]
+								};
+
+								let path = match[3];
+
+								if(path === 'Empty') {
+									disk.empty = true;
+								} else {
+
+									let pathRegex = /^(.+?(?= \(UUID: )) \(UUID: ([^\)]*)\)/gm;
+
+									let pathMatch = pathRegex.exec(path);
+
+									if(pathMatch)  {
+
+										disk.empty = false;
+										disk.path = pathMatch[1];
+										disk.type = pathMatch[1].split('.').slice(1).join('.');
+										disk.uuid = pathMatch[2];
+
+									} else {
+										disk.empty = true;
+									}
+
+								}
+
+								controller.drives.push(disk);
+
 							}
 
-							drive.drives.push(disk);
+							if(controller.drives.length) {
 
-						}
+								Promise.all(controller.drives.map(drive => {
+									return new Promise((resolve, reject) => {
+
+										if(drive.empty) {
+											resolve(drive);
+										} else {
+
+											execute(['showmediuminfo', drive.uuid]).then((stdout, stderr) =>  {
+
+												if(stderr) {
+													reject(stderr)
+												} else {
+
+													const regex = /^Location:\s*(.*)\nStorage format:\s*(.*)\nFormat variant:\s*(.*)\nCapacity:\s*(.*)\nSize on disk: \s*(.*)\n/gm;
+
+													let match = regex.exec(stdout);
+
+													if(match) {
+														drive.type = match[2];
+														drive.format = match[3];
+														drive.totalSize = match[4];
+														drive.size = match[5];
+														resolve(drive);
+													} else {
+														resolve(drive);
+													}
 
 
-					});
+												}
 
+											}).catch(error => {
+
+												if(error.toString().indexOf('is not fully qualified') > -1) {
+													resolve(drive);
+												} else {
+													reject(error);
+												}
+
+											});
+
+										}
+
+									});
+								})).then(drives => {
+									controller.drives = drives;
+									resolve(controller);
+								}).catch(reject);
+
+							} else {
+								resolve(controller);
+							}
+
+
+						});
+					})).then(resolve);
+
+				} else {
+					resolve(controllers);
 				}
 
-				resolve(drives);
+
 
 			}).catch(reject);
 
