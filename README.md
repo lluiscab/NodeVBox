@@ -39,6 +39,8 @@ More examples can be found on the test folder
 
 - `version()` Returns the current vbox version
 - `hostInformation()` Returns information about the host running vbox
+- `systemProps()` Returns vbox system infomation
+
 
 - `.create(vmname, ostype)` Creates a new VM. Returns it's uuid. Check `vboxmanage list ostypes` for ostypes
 
