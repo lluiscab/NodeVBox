@@ -62,6 +62,7 @@ More examples can be found on the test folder
 
 - `.rdp`
   - `.enableRdpAuth()` Sets VBoxAuthSimple as the vbox rdp auth library
+  - `.authType(uuid|vmname, null|external|guest)` Changes the vm rdp auth type
   - `.setRdpStatus(uuid|vmname, true|false)` Enables or disabled RDP for a specific vm
   - `.setPort(uuid|vmname, port)` Sets the port in which the vm can be accessed via rdp
   - `.addUser(uuid|vmname, username, password)` Creates a new RDP user on the vm
