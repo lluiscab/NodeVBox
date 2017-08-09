@@ -5,9 +5,8 @@
 
 		return new Promise((resolve, reject) => {
 
-
 			execute(['modifyvm', '"' + vm  + '"', '--vrdeauthtype', type]).then((string, stderr) => {
-				console.log(string, stderr)
+				resolve();
 			}).catch(reject);
 
 		});
