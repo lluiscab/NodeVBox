@@ -77,6 +77,7 @@ More examples can be found on the test folder
   - `.query(uuid|vmname)` Returns metrics for a vm
 
 - `.storage`
+  - `.listAllVdi()` Lists all created VDI disks
   - `.listMounted(uuid|vmname)` Lists all disks on a vm by controller
   - `.attachVdi(uuid|vmname, path, storagectl, device, port)` Adds vdi to vm (Default SATA controller, port 0, device 0)
   - `.attachISO(uuid|vmname, path, storagectl, device, port)` Adds iso to vm (Default IDE controller, port 0, device 0)
