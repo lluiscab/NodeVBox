@@ -38,6 +38,7 @@ More examples can be found on the test folder
 `nodevbox`
 
 - `version()` Returns the current vbox version
+- `hostInformation()` Returns information about the host running vbox
 
 - `.create(vmname, ostype)` Creates a new VM. Returns it's uuid. Check `vboxmanage list ostypes` for ostypes
 
