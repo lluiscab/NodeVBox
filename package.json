@@ -1,6 +1,6 @@
 {
   "name": "node-vbox",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Interact with virtualbox from nodejs",
   "main": "lib/main.js",
   "repository": {
