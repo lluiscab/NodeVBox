@@ -7,7 +7,7 @@
 
 			execute(['showvminfo', '"' + vm + '"']).then(stdout => {
 
-				let info = [];
+				let info = {};
 
 				let regex = /^(.*?):\s+(.*)$/gim;
 				let match;
