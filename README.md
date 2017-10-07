@@ -92,5 +92,5 @@ More examples can be found on the test folder
 
 # License
 
-[MIT](https://github.com/lluiscab/NodeVBox/blob/master/LICENSE)
+[MIT](https://github.com/NodeVBox/NodeVBox/blob/master/LICENSE)
 
